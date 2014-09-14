@@ -1,0 +1,23 @@
+﻿@model RuSpeak.Models.Auth.User
+
+@if (Model != null)
+{
+    <li>@Html.ActionLink("В начало", "Index", "Home")</li>
+    <li>@Html.ActionLink("Пользователи", "List", "User")</li>
+    <li>@Html.ActionLink(@Model.Email, "EditProfile", "User", new {@Model.UserId}, null)</li>
+    <li>@Html.ActionLink("Выход", "Logout", "User")</li>
+    <li>@Html.ActionLink("О проекте", "About", "Home")</li>
+    <li>@Html.ActionLink("Посты", "List", "Post")</li>
+    <li>@Html.ActionLink("Пост +", "Create", "Post")</li>
+    <li>@Html.ActionLink("Залить", "UploadAudio", "Post")</li>
+}
+else
+{
+    <li>@Html.ActionLink("В начало", "Index", "Home")</li>
+    <li>@Html.ActionLink("Пользователи", "List", "User")</li>
+    <li>@Html.ActionLink("Вход", "Login", "User")</li>
+    @*<li><span class="btn btn-link" id="mylink">Вход</span></li>*@
+    <li>@Html.ActionLink("Регистрация", "Register", "User")</li>
+    <li>@Html.ActionLink("О проекте", "About", "Home")</li>
+}
+

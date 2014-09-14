@@ -1,0 +1,42 @@
+﻿@using System.Web.Optimization
+@model IEnumerable<RuSpeak.Models.Things.Post>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Scripts.Render("~/Scripts/bootstrap-player.js")
+@Styles.Render("~/Content/bootstrap-player.css")
+
+
+<div class="container">
+    <h2>Posts</h2>
+        <table class="table">
+            <tbody>
+                @foreach (var post in Model)
+                {
+                    <tr>
+                        <td>
+                            
+                                <h3>@post.Header</h3>asd
+                                @if (@post.AudioContent != null)
+                                {
+                                    <audio controls preload="none">
+                                        <source src="/Post/AudioStream?audioId=@post.AudioContent.AudioContentId" type="audio/mpeg" />
+                                    </audio>
+                                }
+                                <div>
+                                    @post.Content
+                                </div>
+                            
+                        </td>
+                        <td>
+                            @Html.ActionLink("Удалить", "Delete", "Post", new { id = post.PostId}, null)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+    </table>
+
+</div>
