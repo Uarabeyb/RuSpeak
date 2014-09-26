@@ -141,6 +141,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\SenseiDb.sdf" />
     <Content Include="Content\bootstrap-player.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -277,7 +278,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.7.2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
     <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
   </ItemGroup>
@@ -305,9 +308,9 @@
     <Compile Include="Global\Auth\UserProvider.cs" />
     <Compile Include="Infrastructure\Mappers\CommonMapper.cs" />
     <Compile Include="Infrastructure\Mappers\IMapper.cs" />
-    <Compile Include="Migrations\201409131834487_horror.cs" />
-    <Compile Include="Migrations\201409131834487_horror.Designer.cs">
-      <DependentUpon>201409131834487_horror.cs</DependentUpon>
+    <Compile Include="Migrations\201409260804170_ololowa.cs" />
+    <Compile Include="Migrations\201409260804170_ololowa.Designer.cs">
+      <DependentUpon>201409260804170_ololowa.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Auth\Role.cs" />
@@ -338,13 +341,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Scripts\admin\" />
     <Folder Include="Scripts\default\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201409131834487_horror.resx">
-      <DependentUpon>201409131834487_horror.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201409260804170_ololowa.resx">
+      <DependentUpon>201409260804170_ololowa.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

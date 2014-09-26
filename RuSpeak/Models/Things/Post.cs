@@ -13,7 +13,7 @@ namespace RuSpeak.Models.Things
         [Key]
         public int PostId { get; set; }
         public DateTime DateCreated { get; set; }
-        public User UserPosted { get; set; }
+        public virtual User UserPosted { get; set; }
 
         public virtual ICollection<PieceContent> Pieces { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
@@ -36,7 +36,7 @@ namespace RuSpeak.Models.Things
     {
         [Key]
         public int CommentId { get; set; }
-        public Comment ToComment { get; set; }
+        public virtual Comment ToComment { get; set; }
         public virtual Post Post{get; set; }
         public string Text { get; set; }
         public DateTime Date { get; set; }

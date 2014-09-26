@@ -7,13 +7,13 @@ namespace RuSpeak.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
-    public sealed partial class horror : IMigrationMetadata
+    public sealed partial class ololowa : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(horror));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ololowa));
         
         string IMigrationMetadata.Id
         {
-            get { return "201409131834487_horror"; }
+            get { return "201409260804170_ololowa"; }
         }
         
         string IMigrationMetadata.Source

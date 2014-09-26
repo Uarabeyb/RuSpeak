@@ -16,6 +16,6 @@ namespace RuSpeak.Models.Things
         
         [Column(TypeName = "image")]
         [MaxLength]
-        public byte[] AudioStream { get; set; }
+        public virtual byte[] AudioStream { get; set; }
     }
 }

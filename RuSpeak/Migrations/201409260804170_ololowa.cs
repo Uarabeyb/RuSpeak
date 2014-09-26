@@ -3,7 +3,7 @@ namespace RuSpeak.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class horror : DbMigration
+    public partial class ololowa : DbMigration
     {
         public override void Up()
         {
@@ -64,6 +64,43 @@ namespace RuSpeak.Migrations
                 .ForeignKey("dbo.Posts", t => t.Post_PostId, cascadeDelete: true)
                 .Index(t => t.AudioContent_AudioContentId)
                 .Index(t => t.Post_PostId);
+            
+            CreateTable(
+                "dbo.Users",
+                c => new
+                    {
+                        UserId = c.Int(nullable: false, identity: true),
+                        RegisterDate = c.DateTime(nullable: false),
+                        Email = c.String(maxLength: 4000),
+                        UserName = c.String(maxLength: 4000),
+                        Password = c.String(maxLength: 4000),
+                        Avatar = c.Binary(maxLength: 4000),
+                    })
+                .PrimaryKey(t => t.UserId);
+            
+            CreateTable(
+                "dbo.Roles",
+                c => new
+                    {
+                        RoleId = c.Int(nullable: false, identity: true),
+                        Code = c.String(maxLength: 4000),
+                        Name = c.String(maxLength: 4000),
+                    })
+                .PrimaryKey(t => t.RoleId);
+            
+            CreateTable(
+                "dbo.UserRoles",
+                c => new
+                    {
+                        UserId = c.Int(nullable: false),
+                        RoleId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.Roles", t => t.RoleId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
+            
         }
         
         public override void Down()
@@ -84,6 +121,9 @@ namespace RuSpeak.Migrations
             DropIndex("dbo.Comments", new[] { "ToComment_CommentId" });
             DropIndex("dbo.Posts", new[] { "UserPosted_UserId" });
             DropIndex("dbo.AudioContents", new[] { "AudioContentId" });
+            DropTable("dbo.UserRoles");
+            DropTable("dbo.Roles");
+            DropTable("dbo.Users");
             DropTable("dbo.PieceContents");
             DropTable("dbo.Comments");
             DropTable("dbo.Posts");

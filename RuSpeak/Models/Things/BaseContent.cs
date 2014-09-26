@@ -9,6 +9,6 @@ namespace RuSpeak.Models.Things
     {
         public string Header { get; set; }
         public string Content { get; set; }
-        public AudioContent AudioContent { get; set; }
+        public virtual AudioContent AudioContent { get; set; }
     }
 }
