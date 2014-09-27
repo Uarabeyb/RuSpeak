@@ -11,7 +11,7 @@
 
 
 <div class="container">
-    <h2>Posts</h2>
+    <h2>Лента</h2>
         <table class="table">
             <tbody>
                 @foreach (var post in Model)
@@ -32,7 +32,15 @@
                             
                         </td>
                         <td>
-                            @Html.ActionLink("Удалить", "Delete", "Post", new { id = post.PostId}, null)
+                            <lu>
+                                <li>
+                                    @Html.ActionLink("Удалить", "Delete", "Post", new { id = post.PostId}, null)
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Удалить", "Delete", "Post", new { id = post.PostId}, null)
+                                </li>
+                            </lu>
+                            
                         </td>
                     </tr>
                 }
