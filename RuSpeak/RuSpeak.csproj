@@ -255,6 +255,9 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Post\List.cshtml" />
     <Content Include="Views\Post\Create.cshtml" />
+    <Content Include="Views\Post\Edit.cshtml" />
+    <Content Include="Views\Post\CreatePiece.cshtml" />
+    <Content Include="Views\Post\ShowPost.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -311,6 +314,18 @@
     <Compile Include="Migrations\201409260804170_ololowa.Designer.cs">
       <DependentUpon>201409260804170_ololowa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201409271001421_1.cs" />
+    <Compile Include="Migrations\201409271001421_1.Designer.cs">
+      <DependentUpon>201409271001421_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409271012195_2.cs" />
+    <Compile Include="Migrations\201409271012195_2.Designer.cs">
+      <DependentUpon>201409271012195_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201409271212056_3.cs" />
+    <Compile Include="Migrations\201409271212056_3.Designer.cs">
+      <DependentUpon>201409271212056_3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Auth\Role.cs" />
     <Compile Include="Models\Auth\User.cs" />
@@ -346,6 +361,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201409260804170_ololowa.resx">
       <DependentUpon>201409260804170_ololowa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409271001421_1.resx">
+      <DependentUpon>201409271001421_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409271012195_2.resx">
+      <DependentUpon>201409271012195_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201409271212056_3.resx">
+      <DependentUpon>201409271212056_3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

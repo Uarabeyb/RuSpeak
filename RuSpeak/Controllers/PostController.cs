@@ -26,6 +26,8 @@ namespace RuSpeak.Controllers
             return View(postRepository.Posts.OrderByDescending(x=>x.DateCreated));
         }
 
+        #region create
+
         [HttpGet]
         [Authorize]
         public ActionResult Create()
@@ -62,6 +64,84 @@ namespace RuSpeak.Controllers
 
             return View(postInfo);
         }
+
+        #endregion
+
+        #region edit
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult Edit(int postId)
+        {
+            var post = postRepository.GetPost(postId);
+            var postInfo = (PostInfo)ModelMapper.Map(post, typeof(Post), typeof(PostInfo));
+            return View(postInfo);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult Edit(PostInfo postInfo)
+        {
+            if (ModelState.IsValid)
+            {
+                var post = postRepository.GetPost(postInfo.PostId);
+                post.Header = postInfo.Header;
+                post.Content = postInfo.Content;
+                post.DateLastEdited = DateTime.Now;
+                postRepository.SavePost(post);
+                return RedirectToAction("List", "Post");
+
+            }
+
+            return View(postInfo);
+        }
+
+        #endregion
+
+        #region Add piece
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult CreatePiece(int postId)
+        {
+            return View(new PieceInfo{PostId = postId});
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult CreatePiece(PieceInfo postInfo)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var post = postRepository.GetPost(postInfo.PostId);
+                var piece = new PieceContent
+                {
+                    Post = post,
+                    Content = postInfo.Content,
+                    Header = postInfo.Header
+                };
+                
+                postRepository.SavePieceContent(piece);
+                return RedirectToAction("ShowPost", "Post");
+
+            }
+
+            return View(postInfo);
+        }
+
+        #endregion
+
+        #region detail post
+
+        public ActionResult ShowPost(int postId)
+        {
+            var post = postRepository.GetPost(postId);
+            return View(post);
+        }
+
+        #endregion
+
 
         public ActionResult AudioStream(int audioId)
         {

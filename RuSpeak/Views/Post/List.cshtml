@@ -32,14 +32,20 @@
                             
                         </td>
                         <td>
-                            <lu>
+                            <ul>
                                 <li>
                                     @Html.ActionLink("Удалить", "Delete", "Post", new { id = post.PostId}, null)
                                 </li>
                                 <li>
-                                    @Html.ActionLink("Удалить", "Delete", "Post", new { id = post.PostId}, null)
+                                    @Html.ActionLink("Изменить", "Edit", "Post", new { postId = post.PostId}, null)
                                 </li>
-                            </lu>
+                                <li>
+                                    @Html.ActionLink("Добавить контент", "CreatePiece", "Post", new { postId = post.PostId}, null)
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Детально", "ShowPost", "Post", new { postId = post.PostId}, null)
+                                </li>
+                            </ul>
                             
                         </td>
                     </tr>

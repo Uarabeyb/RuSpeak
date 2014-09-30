@@ -12,5 +12,8 @@ namespace RuSpeak.DAL.Abstract
         void SavePost(Post post);
         void DeletePost(int id);
         Post GetPost(int id);
+
+        void SavePieceContent(PieceContent piece);
+        void RemovePieceContent(int pieceId);
     }
 }

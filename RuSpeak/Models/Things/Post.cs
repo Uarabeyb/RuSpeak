@@ -12,7 +12,9 @@ namespace RuSpeak.Models.Things
     {
         [Key]
         public int PostId { get; set; }
+
         public DateTime DateCreated { get; set; }
+        public DateTime? DateLastEdited { get; set; }
         public virtual User UserPosted { get; set; }
 
         public virtual ICollection<PieceContent> Pieces { get; set; }
@@ -29,6 +31,7 @@ namespace RuSpeak.Models.Things
     {
         [Key]
         public int PieceContentId { get; set; }
+
         public virtual Post Post { get; set; }
     }
 
@@ -36,14 +39,35 @@ namespace RuSpeak.Models.Things
     {
         [Key]
         public int CommentId { get; set; }
+
         public virtual Comment ToComment { get; set; }
-        public virtual Post Post{get; set; }
+        public virtual Post Post { get; set; }
         public string Text { get; set; }
         public DateTime Date { get; set; }
     }
 
-    public class PostInfo 
+    public class PostInfo
     {
+        [Required]
+        public int PostId { get; set; }
+
+        [Required]
+        [StringLength(200, ErrorMessage = "Название поста \"{0}\" должно содержать не менее {2} символов.", MinimumLength = 4)]
+        public string Header { get; set; }
+
+        [Required]
+        [StringLength(3999, ErrorMessage = "Основное тело поста \"{0}\" должно содержать не менее {2} символов.", MinimumLength = 4)]
+        public string Content { get; set; }
+    }
+
+    public class PieceInfo
+    {
+        [Required]
+        public int PieceContentId { get; set; }
+
+        [Required]
+        public int PostId { get; set; }
+
         [Required]
         [StringLength(200, ErrorMessage = "Название поста \"{0}\" должно содержать не менее {2} символов.", MinimumLength = 4)]
         public string Header { get; set; }

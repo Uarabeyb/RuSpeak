@@ -56,7 +56,37 @@ namespace RuSpeak.DAL.Concrete
         {
             using (var context = new MyContext())
             {
-                return context.Posts.SingleOrDefault(p => p.PostId == id);
+                return context.Posts.Include("AudioContent").Include("Pieces").Include("Comments").SingleOrDefault(p => p.PostId == id);
+            }
+        }
+
+        public void SavePieceContent(PieceContent piece)
+        {
+            using (var context = new MyContext())
+            {
+                if (piece.PieceContentId == 0)
+                {
+                    context.Posts.Attach(piece.Post);
+                    context.Pieces.Add(piece);
+                }
+                else
+                {
+                    context.Pieces.Attach(piece);
+                    context.Entry(piece).State = EntityState.Modified;
+                }
+                context.SaveChanges();
+            }
+        }
+        public void RemovePieceContent(int pieceId)
+        {
+            using (var context = new MyContext())
+            {
+                var piece = context.Pieces.FirstOrDefault(t => t.PieceContentId == pieceId);
+                if (piece != null)
+                {
+                    context.Pieces.Remove(piece);
+                    context.SaveChanges();
+                }
             }
         }
     }

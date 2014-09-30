@@ -13,6 +13,7 @@ namespace RuSpeak.Models
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<PieceContent> Pieces { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<AudioContent> AudioContents { get; set; }
 
@@ -35,8 +36,8 @@ namespace RuSpeak.Models
                 .WillCascadeOnDelete();
 
             modelBuilder.Entity<Post>()
-                .HasOptional(p=>p.AudioContent)
-                .WithRequired(c => c.Post)
+                .HasOptional(p => p.AudioContent)
+                .WithOptionalPrincipal(c => c.Post)
                 .WillCascadeOnDelete();
 
             modelBuilder.Entity<Post>()

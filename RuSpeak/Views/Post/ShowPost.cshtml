@@ -1,0 +1,30 @@
+﻿@model RuSpeak.Models.Things.Post
+
+@{
+    ViewBag.Title = "Show Post";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    
+
+<h3>@Model.Header</h3>
+    @if (@Model.AudioContent != null)
+    {
+        <audio controls preload="none">
+            <source src="/Post/AudioStream?audioId=@Model.AudioContent.AudioContentId" type="audio/mpeg" />
+        </audio>
+    }
+<div>
+    @Model.Content
+</div>
+@if (@Model.Pieces != null)
+    {
+        foreach (var piece in @Model.Pieces)
+        {
+            <h4>@piece.Header</h4>
+            <div>
+                @piece.Content
+            </div>
+        }
+    }
+</div>
