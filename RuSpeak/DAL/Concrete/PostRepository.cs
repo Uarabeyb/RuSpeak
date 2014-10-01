@@ -56,7 +56,15 @@ namespace RuSpeak.DAL.Concrete
         {
             using (var context = new MyContext())
             {
-                return context.Posts.Include("AudioContent").Include("Pieces").Include("Comments").SingleOrDefault(p => p.PostId == id);
+                return context.Posts.Include("AudioContent").Include("Pieces").Include("Comments.UserPosted").SingleOrDefault(p => p.PostId == id);
+            }
+        }
+
+        public PieceContent GetPiece(int id)
+        {
+            using (var context = new MyContext())
+            {
+                return context.Pieces.Include("Post").SingleOrDefault(p => p.PieceContentId == id);
             }
         }
 
@@ -77,6 +85,20 @@ namespace RuSpeak.DAL.Concrete
                 context.SaveChanges();
             }
         }
+
+        public void DeletePiece(int pieceId)
+        {
+            using (var context = new MyContext())
+            {
+                var piece = context.Pieces.FirstOrDefault(t => t.PieceContentId == pieceId);
+                if (piece != null)
+                {
+                    context.Pieces.Remove(piece);
+                    context.SaveChanges();
+                }
+            }
+        }
+
         public void RemovePieceContent(int pieceId)
         {
             using (var context = new MyContext())

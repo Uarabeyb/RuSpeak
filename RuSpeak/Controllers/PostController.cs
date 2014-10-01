@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using RuSpeak.DAL.Abstract;
 using RuSpeak.Models;
 using RuSpeak.Models.Things;
@@ -123,11 +124,53 @@ namespace RuSpeak.Controllers
                 };
                 
                 postRepository.SavePieceContent(piece);
-                return RedirectToAction("ShowPost", "Post");
+                return RedirectToAction("ShowPost", new {postId = post.PostId});
 
             }
 
             return View(postInfo);
+        }
+
+        #endregion
+
+        #region edit piece
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult EditPiece(int pieceId)
+        {
+            var piece = postRepository.GetPiece(pieceId);
+            var pieceInfo = new PieceInfo
+            {
+                Content = piece.Content,
+                Header = piece.Header,
+                PieceContentId = pieceId,
+                PostId = piece.Post.PostId
+            };
+            return View(pieceInfo);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult EditPiece(PieceInfo pieceInfo)
+        {
+            if (ModelState.IsValid)
+            {
+                var piece = postRepository.GetPiece(pieceInfo.PieceContentId);
+                piece.Content = pieceInfo.Content;
+                piece.Header = pieceInfo.Header;
+
+                postRepository.SavePieceContent(piece);
+                return RedirectToAction("ShowPost", new { postId = piece.Post.PostId });
+            }
+
+            return View(pieceInfo);
+        }
+
+        public ActionResult DeletePiece(int pieceId, int postId)
+        {
+            postRepository.DeletePiece(pieceId);
+            return RedirectToAction("ShowPost", new { postId = postId });
         }
 
         #endregion

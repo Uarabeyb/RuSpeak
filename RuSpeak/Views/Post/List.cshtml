@@ -99,45 +99,49 @@
 
 <div class="container">
     <h2>Лента</h2>
-        <table class="table">
-            <tbody>
-                @foreach (var post in Model)
-                {
-                    <tr>
-                        <td>
+    <table class="table">
+        <colgroup>
+            <col span="1" style="width: 82%;">
+            <col span="1" style="width: 18%;">
+        </colgroup>
+        <tbody>
+            @foreach (var post in Model)
+            {
+                <tr>
+                    <td>
                             
-                                <h3>@post.Header</h3>
-                                @if (@post.AudioContent != null)
-                                {
-                                    <audio controls preload="none">
-                                        <source src="/Post/AudioStream?audioId=@post.AudioContent.AudioContentId" type="audio/mpeg" />
-                                    </audio>
-                                }
-                                <div>
-                                    @post.Content
-                                </div>
+                        <h3>@post.Header</h3>
+                        @if (@post.AudioContent != null)
+                        {
+                            <audio controls preload="none">
+                                <source src="/Post/AudioStream?audioId=@post.AudioContent.AudioContentId" type="audio/mpeg" />
+                            </audio>
+                        }
+                        <div>
+                            @post.Content
+                        </div>
                             
-                        </td>
-                        <td>
-                            <ul>
-                                <li>
-                                    @Html.ActionLink("Удалить", "Delete", "Post", new { id = post.PostId}, null)
-                                </li>
-                                <li>
-                                    @Html.ActionLink("Изменить", "Edit", "Post", new { postId = post.PostId}, null)
-                                </li>
-                                <li>
-                                    @Html.ActionLink("Добавить контент", "CreatePiece", "Post", new { postId = post.PostId}, null)
-                                </li>
-                                <li>
-                                    @Html.ActionLink("Детально", "ShowPost", "Post", new { postId = post.PostId}, null)
-                                </li>
-                            </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>
+                                @Html.ActionLink("Удалить", "Delete", "Post", new { id = post.PostId}, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("Изменить", "Edit", "Post", new { postId = post.PostId}, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("Добавить контент", "CreatePiece", "Post", new { postId = post.PostId}, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("Детально", "ShowPost", "Post", new { postId = post.PostId}, null)
+                            </li>
+                        </ul>
                             
-                        </td>
-                    </tr>
-                }
-            </tbody>
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 
 </div>

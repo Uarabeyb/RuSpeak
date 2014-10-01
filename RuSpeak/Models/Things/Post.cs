@@ -40,10 +40,26 @@ namespace RuSpeak.Models.Things
         [Key]
         public int CommentId { get; set; }
 
+        public virtual User UserPosted { get; set; }
         public virtual Comment ToComment { get; set; }
         public virtual Post Post { get; set; }
         public string Text { get; set; }
         public DateTime Date { get; set; }
+    }
+
+    public class CommentInfo
+    {
+        [Required]
+        public int CommentId { get; set; }
+
+        [Required]
+        public int PostId { get; set; }
+
+        public int ToCommentId { get; set; }
+
+        [Required]
+        [StringLength(3999, ErrorMessage = "Основное тело комментария \"{0}\" должно содержать не менее {2} символов.", MinimumLength = 1)]
+        public string Text { get; set; }
     }
 
     public class PostInfo

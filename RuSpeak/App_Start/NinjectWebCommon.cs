@@ -67,6 +67,7 @@ namespace RuSpeak.App_Start
             kernel.Bind<IMapper>().To<CommonMapper>();
             kernel.Bind<IUserRepository>().To<UserRepository>().InSingletonScope();
             kernel.Bind<IPostRepository>().To<PostRepository>().InSingletonScope();
+            kernel.Bind<ICommentRepository>().To<CommentRepository>().InSingletonScope();
             kernel.Bind<IAuthentication>().To<CustomAuthentication>().InRequestScope();
         }        
     }
