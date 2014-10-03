@@ -104,7 +104,13 @@
                                 </div>
                             </div>
                         </td>
-                        
+                        <td>
+                            <ul>
+                                <li>
+                                    @Html.ActionLink("Удалить", "Delete", "Comment", new { commentId = @comment.CommentId, postId = @Model.PostId}, null)
+                                </li>
+                            </ul>
+                        </td>
                     </tr>
                 }
             }

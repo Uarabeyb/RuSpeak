@@ -18,8 +18,6 @@ namespace RuSpeak.DAL.Concrete
                 using (var context = new MyContext())
                 {
                     return context.Posts.Include("AudioContent").ToList();
-                    //return (from p in context.Posts
-                    //    select new {p.Header}).ToList();
                 }        
             }
         }

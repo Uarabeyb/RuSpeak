@@ -53,5 +53,11 @@ namespace RuSpeak.Controllers
             }
             return View(commentInfo);
         }
+
+        public ActionResult Delete(int commentId, int postId)
+        {
+            repository.DeleteComment(commentId);
+            return RedirectToAction("ShowPost", "Post", new {postId = postId});
+        }
 	}
 }
