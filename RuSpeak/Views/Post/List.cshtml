@@ -1,0 +1,147 @@
+﻿@using System.Web.Optimization
+@model IEnumerable<RuSpeak.Models.Things.Post>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Scripts.Render("~/Scripts/bootstrap-player.js")
+@Styles.Render("~/Content/bootstrap-player.css")
+<script>
+    $('body').append("<div id='robinzon'><div style='display:table;height:100%;width:100%;'><div style='display:table-cell;vertical-align:middle;width:150px;'></div></div></div>");
+    $("#robinzon").css({
+        "width": "350px",
+        "height": "150px",
+        "background": "none repeat scroll 0% 0% rgba(0, 0, 0, 0.5)",
+        "position": "fixed",
+        "display": "none",
+        "top": "35%",
+        "left": "35%",
+        "z-index": "999",
+        "text-align": "center",
+        "color": "white",
+        "font-family": "Segoe Ui",
+        "font-size": "25px",
+        "font-weight": "100",
+        "padding": "10px",
+        "border-radius": "85px"
+    });
+    var lang = '';
+    var text = '';
+    $(document).click(function () {
+        $(this).dblclick();
+    });
+    $(document).dblclick(function (e) {
+        text = get_selection();
+        if (text != '') {
+            $.ajax({
+                type: "POST",
+                url: 'https://translate.yandex.net/api/v1.5/tr.json/detect?key=trnsl.1.1.20140930T113416Z.039b339af6112dba.40848fe3a1a8160493786e22a60342a50a05cb6b&text=' + text,
+                success: function (response) {
+                    lang = response.lang;
+                    console.log(lang);
+                }
+            });
+            if (lang == 'en') {
+                lang = 'ru';
+            }
+            else {
+                lang = 'en';
+            }
+            var link = 'https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20140930T113416Z.039b339af6112dba.40848fe3a1a8160493786e22a60342a50a05cb6b&text=' + text + '&lang=' + lang;
+            text = '';
+            $.ajax({
+                type: 'GET',
+                url: link,
+                success: function (response) {
+                    $("#robinzon div div").text(response.text[0]);
+                    $("#robinzon").show();
+                    setTimeout('$("#robinzon").fadeOut("slow")', 3000);
+                }
+            });
+        }
+    });
+
+    function get_selection() {
+        var txt = '';
+        if (window.getSelection) {
+            txt = window.getSelection();
+        } else if (document.getSelection) {
+            txt = document.getSelection();
+        } else if (document.selection) {
+            txt = document.selection.createRange().text;
+        }
+        return txt;
+    }
+
+    //function ololo(response) {
+    //    alert(response.text[0]);
+    //    }
+
+    //$(document).dblclick(function (e) {
+    //    var t = get_selection();
+
+    //    $.ajax({
+    //        type: 'GET',
+    //        url: 'https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20140930T113416Z.039b339af6112dba.40848fe3a1a8160493786e22a60342a50a05cb6b&lang=ru-en&text=' + t,
+    //        success: function (response) {
+    //            ololo(response);
+    //        },
+    //        error: function(xhr, ajaxOptions, thrownError) {
+    //            alert(xhr.status);
+    //            alert(thrownError);
+    //        }
+    //    });
+    //});
+</script>
+
+
+<div class="container">
+    <h2>Лента</h2>
+    <table class="table">
+        <colgroup>
+            <col span="1" style="width: 82%;">
+            <col span="1" style="width: 18%;">
+        </colgroup>
+        <tbody>
+            @foreach (var post in Model)
+            {
+                <tr>
+                    <td>
+                            
+                        <h3>@post.Header</h3>
+                        @if (@post.AudioContent != null)
+                        {
+                            <audio controls preload="none">
+                                <source src="/Post/AudioStream?audioId=@post.AudioContent.AudioContentId" type="audio/mpeg" />
+                            </audio>
+                        }
+                        <div>
+                            @post.Content
+                        </div>
+                            
+                    </td>
+                    <td>
+                        <ul>
+                            <li>
+                                @Html.ActionLink("Удалить", "Delete", "Post", new { id = post.PostId}, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("Изменить", "Edit", "Post", new { postId = post.PostId}, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("Добавить контент", "CreatePiece", "Post", new { postId = post.PostId}, null)
+                            </li>
+                            <li>
+                                @Html.ActionLink("Детально", "ShowPost", "Post", new { postId = post.PostId}, null)
+                            </li>
+                        </ul>
+                            
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

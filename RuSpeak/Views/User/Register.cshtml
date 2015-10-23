@@ -1,0 +1,55 @@
+﻿@using System.Web.Optimization
+@model RuSpeak.Models.Auth.RegisterInfo
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+}*@
+
+<div class="container">
+    
+    @using (Html.BeginForm("Register", "User", FormMethod.Post, new { @class = "form-signin", role="form" }))
+    {
+        @Html.AntiForgeryToken()
+        
+        <h2 class="form-signin-heading">Регистрация</h2>
+        <div class="form-group">
+           @* @Html.LabelFor(m => m.Email, new { @class="control-label col-xs-3 col-md-3 col-sm-3 col-lg-3 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1" })*@
+            <div>
+                @Html.TextBoxFor(m => m.Email, new {@class="form-control", @placeholder="Email"})
+                @*<input type="email" name="Email" class="form-control" placeholder="Адрес эл. почты" autofocus required>*@
+            </div>
+            @*<div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+                @Html.ValidationMessageFor(m  => m.Email, null, new { @class="field-validation-valid" })
+            </div>*@
+        </div>
+            
+        <div class="form-group">
+            <div>
+                @Html.PasswordFor(m => m.Password, new {@class="form-control", @placeholder="Password"})
+            </div>
+        </div>
+
+            
+        <div class="form-group">
+            <div>
+                @Html.PasswordFor(m => m.ConfirmPassword, new {@class="form-control", @placeholder="Confirm Password"})
+            </div>
+        </div>
+            
+        @Html.ValidationSummary()
+
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Register</button>
+        
+        
+        @Html.ActionLink("Cancel", "Index", "Home", null, new { @class = "btn btn-lg btn-warning btn-block" })
+        
+    }
+            
+</div>
+

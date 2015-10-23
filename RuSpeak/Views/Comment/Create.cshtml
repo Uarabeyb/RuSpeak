@@ -1,0 +1,36 @@
+﻿@model RuSpeak.Models.Things.CommentInfo
+
+@using (Html.BeginForm("Create", "Comment", FormMethod.Post, new {enctype = "multipart/form-data", @class = "content-input", role = "form"}))
+{
+    @Html.AntiForgeryToken()
+
+    <h2 class="form-signin-heading">Добавить комментарий</h2>
+
+    <div class="form-group">
+        <div>
+            @Html.TextBoxFor(m => m.Text, new {@class="form-control", @placeholder="Комментарий"})
+        </div>
+    </div>
+    
+    <div class="form-group hidden">
+        <div>
+            @Html.TextBoxFor(m => m.PostId)
+        </div>
+    </div>
+    
+    <div class="form-group hidden">
+        <div>
+            @Html.TextBoxFor(m => m.CommentId)
+        </div>
+    </div>
+    
+    <div class="form-group hidden">
+        <div>
+            @Html.TextBoxFor(m => m.ToCommentId)
+        </div>
+    </div>
+
+    @Html.ValidationSummary()
+
+    <button type="submit" class="btn btn-lg btn-primary btn-block">Отправить</button>
+}

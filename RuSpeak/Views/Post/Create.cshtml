@@ -1,0 +1,40 @@
+﻿@model RuSpeak.Models.Things.PostInfo
+
+@{
+    ViewBag.Title = "Create Post";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    
+    @using (Html.BeginForm("Create", "Post", FormMethod.Post, new { enctype = "multipart/form-data", @class = "content-input", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        
+        <h2 class="form-signin-heading">Создание нового поста</h2>
+        <div class="form-group">
+            <div>
+                @Html.TextBoxFor(m => m.Header, new {@class="form-control", @placeholder="Название поста"})
+            </div>
+        </div>
+            
+        <div class="form-group">
+            <div>
+                @Html.TextAreaFor(m => m.Content, new {@class="form-control", @placeholder="Контент", @rows=25, @style="resize: none"})
+            </div>
+        </div>
+            
+        @Html.ValidationSummary()
+
+        <label for="audio">Upload file:</label>
+        <input type="file" name="audio" id="audio"/><br></br>
+            
+
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Сохранить</button>
+        
+        
+        @Html.ActionLink("Отменить", "Index", "Home", null, new { @class = "btn btn-lg btn-warning btn-block" })
+        
+    }
+            
+</div>

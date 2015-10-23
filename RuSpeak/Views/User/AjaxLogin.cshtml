@@ -1,0 +1,115 @@
+﻿@using System.Web.Optimization
+@model RuSpeak.Models.Auth.LoginView
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<div class="container">
+    @using (Html.BeginForm("Login", "User", FormMethod.Post, new { @class = "form-signin", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <h2 class="form-signin-heading">Вход</h2>
+
+        <div class="form-group">
+            <input type="email" class="form-control" name="Email" placeholder="Почта" required autofocus>
+        </div>
+        
+        <div class="form-group">
+            <input type="password" class="form-control" name="Password" placeholder="Пароль" required>
+        </div>
+        
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="IsPersistent" value="true"> 
+                Запомнить меня
+            </label>
+        </div>
+        
+  
+        @Html.ValidationSummary()
+
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Войти</button>
+        
+        @Html.ActionLink("Cancel", "Index", "Home", null, new { @class = "btn btn-lg btn-warning btn-block" })
+    }
+</div>
+
+@*<div class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Login</h3>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            @using (Html.BeginForm("Login", "User", FormMethod.Post, new { @class = "form-signin", role = "form", id = "LoginForm" }))
+            {
+                @Html.AntiForgeryToken()
+        
+                <h2 class="form-signin-heading">Вход</h2>
+        
+                <div class="form-group">
+                    <input type="email" class="form-control" name="Email" placeholder="Почта" required autofocus>
+                </div>
+                
+                <div class="form-group">
+                    <input type="password" class="form-control" name="Password" placeholder="Пароль" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="IsPersistent" value="true"> 
+                        Запомнить меня
+                    </label>
+                </div>
+                
+          
+                @Html.ValidationSummary()
+        
+            }
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn btn-primary" id="LoginButton">Login</button>
+    </div>
+</div>*@
+
+@*<div class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Login</h3>
+    </div>
+    <div class="modal-body">
+        @using (Html.BeginForm("Ajax", "Login", FormMethod.Post, new { @class = "form-horizontal", id = "LoginForm" }))
+        {
+            <fieldset>
+                <legend>Вход</legend>
+                <div class="control-group">
+                    <label class="control-label" for="Email">
+                        Email</label>
+                    <div class="controls">
+                        @Html.TextBox("Email", Model.Email, new { @class = "input-xlarge" })
+                        <p class="help-block">Введите Email</p>
+                        @Html.ValidationMessage("Email")
+                    </div>
+
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="Password">
+                        Пароль</label>
+                    <div class="controls">
+                        @Html.Password("Password", Model.Password, new { @class = "input-xlarge" })
+                        @Html.ValidationMessage("Password")
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn btn-primary" id="LoginButton">Login</button>
+    </div>
+</div>*@

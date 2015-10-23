@@ -1,0 +1,35 @@
+﻿@model IEnumerable<RuSpeak.Models.Auth.User>
+
+@{
+    ViewBag.Title = "Пользователи";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Пользователи</h1>
+<div class="panel-default col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>UserId</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Date register</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var t in Model)
+            {
+                <tr>
+                    <td>@t.UserId</td>
+                    <td>@t.UserName</td>
+                    <td>@t.Email</td>
+                    <td>@t.Password</td>
+                    <td>@t.RegisterDate</td>
+                    <td>@Html.ActionLink("Удалить", "Delete", "User", new { userId = t.UserId}, null)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
